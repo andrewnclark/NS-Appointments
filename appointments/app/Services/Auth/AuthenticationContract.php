@@ -2,7 +2,7 @@
 
 namespace App\Services\Auth;
 
-use Illumiante\Http\Request;
+use Laravel\Lumen\Http\Request;
 use App\User;
 
 interface AuthenticationContract

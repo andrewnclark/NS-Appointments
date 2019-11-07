@@ -2,7 +2,7 @@
 
 namespace App\Services\Auth;
 
-use Illumiante\Http\Request;
+use Laravel\Lumen\Http\Request;
 use App\User;
 
 class DefaultLumenAuth implements AuthenticationContract {
@@ -12,5 +12,7 @@ class DefaultLumenAuth implements AuthenticationContract {
         if ($request->input('api_token')) {
             return User::where('api_token', $request->input('api_token'))->first();
         }
+
+        return null;
     }
 }

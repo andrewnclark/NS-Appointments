@@ -20,8 +20,8 @@ class AuthServiceProvider extends ServiceProvider
         // Since no details were provided about how to authenticate a user I choose to 
         // use the container to bind an implementation of auth - allowing us to use the
         // default Lumen auth for the time being but switch to others later.
+        $this->app->bind('services.auth', AuthenticationContract::class);
         $this->app->bind(AuthenticationContract::class, DefaultLumenAuth::class);
-        $this->app->alias('services.auth', AuthenticationContract::class);
     }
 
     /**
