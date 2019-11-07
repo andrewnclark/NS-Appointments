@@ -10,4 +10,8 @@ class AuthTest extends TestCase
      *
      * @test
      */
+    public function routes_are_authenticated()
+    {
+        $user = factory(User::class)->create(['api_token' => 'valid']);
+    }
 }
