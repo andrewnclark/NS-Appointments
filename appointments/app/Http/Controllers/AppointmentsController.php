@@ -36,6 +36,9 @@ class AppointmentsController extends Controller
         );
     }
 
+    /**
+     * A bad invalidated version that has much work to do.
+     */
     public function store(Request $request)
     {
         $appointment = Appointment::create([
