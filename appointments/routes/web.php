@@ -14,3 +14,8 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->get('/appointments/{id}/', [
+    'as' => 'appointments.show',
+    'uses' => 'AppointmentsController@show'
+]);

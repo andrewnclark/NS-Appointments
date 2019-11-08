@@ -13,11 +13,26 @@ class AppointmentsIntegrationTest extends TestCase
      *
      * @test
      */
-    public function can_access_attendee()
+    public function can_view_an_appointment()
     {
-        $attendee = factory(App\Attendee::class)->create();
-        $appointment = factory(App\Appointment::class)->create(['attendee_id' => $attendee->id]);
+        $appointment = factory(App\Appointment::class)->create();
+        $user = factory(App\User::class)->create();
 
-        $this->assertEquals($attendee->id, $appointment->attendee->id);
+        $this->actingAs($user)
+            ->get(route('appointments.show', ['id' => $appointment->id]))
+            ->seeJson(['appointment_id' => $appointment->id]);
+    }
+
+    /**
+     * @test
+     */
+    public function can_view_list_of_appointments()
+    {
+        $appointment = factory(App\Appointment::class)->create();
+        $user = factory(App\User::class)->create();
+
+        $this->actingAs($user)
+            ->get(route('appointments.index'))
+            ->seeJson(['appointment_id' => $appointment->id]);
     }
 }
