@@ -29,4 +29,4 @@ The data format of the API and the data stored on the models is also very rudime
 ## Overall
 I'm not that happy with the end result but I hope that I touched on enough areas to show how I would tackle this. My enviornment that I cobbled together is far from perfect - I can't get autocompletion out of my IDE as I dont have PHP on my machine and I haven't took the type to setup some of my typical tooling like PHP CS Fixer for automating code-formatting.
 
-I haven't got as much done as I would have liked but I stuck to a TDD approach.
+I haven't got as much done as I would have liked but I stuck to a TDD approach. My git history isn't ideal, I did PR one branch as an example of a typical workflow. I just miss my typical setup - this machine is a dedicated gaming machine and has non of my usual config
