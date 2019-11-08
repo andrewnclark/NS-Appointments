@@ -3,6 +3,7 @@
 namespace App\Transformers;
 
 use App\Appointment as Model;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Use a dedicated transformation class, since the API specification wasn't provided this
@@ -26,8 +27,14 @@ class Appointment
         ];
     }
 
-    public function fromCollection($collection): array
+    public function fromCollection(Collection $collection): array
     {
-        return [];
+        $items = $collection->map(function(Model $model) {
+            return $this->fromModel($model);
+        })->toArray();
+
+        return [
+            'appointments' => $items
+        ];
     }
 }

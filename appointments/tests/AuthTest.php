@@ -27,8 +27,6 @@ class AuthTest extends TestCase
      */
     public function index_returns_401_if_not_authenticated()
     {
-        $user = factory(App\User::class)->create(['api_token' => 'valid']);
-
         $reponse = $this->call('GET', '/');
 
         $this->assertEquals(401, $reponse->status());

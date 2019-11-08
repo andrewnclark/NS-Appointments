@@ -20,10 +20,12 @@ class AppointmentsController extends Controller
 
     public function index()
     {
-        
+        return $this->response(
+            $this->transformer->fromCollection(Appointment::all())
+        );
     }
 
-    public function show(Request $request, $id)
+    public function show($id)
     {
         $appointment = Appointment::find($id);
 
