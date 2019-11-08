@@ -26,13 +26,12 @@ class AppointmentsIntegrationTest extends TestCase
     /**
      * @test
      */
-    public function can_view_list_of_appointments()
+    public function returns_404_if_resource_doesnt_exist()
     {
-        $appointment = factory(App\Appointment::class)->create();
         $user = factory(App\User::class)->create();
 
-        $this->actingAs($user)
-            ->get(route('appointments.index'))
-            ->seeJson(['appointment_id' => $appointment->id]);
+        $response = $this->actingAs($user)->call('GET', route('appointments.show', ['id' => 9999]));
+
+        $this->assertEquals(404, $response->status());
     }
 }

@@ -32,8 +32,17 @@ class AppointmentsController extends Controller
         );
     }
 
+    /**
+     * I don't like this and would prefer to move the responses
+     * into classes of their own; either CollectionResponse($data) or
+     * ResourceResponse($data)
+     */
     private function response(array $data)
     {
+        if(empty($data)) {
+            return abort(404);
+        }
+
         return response()->json($data);
     }
 }
