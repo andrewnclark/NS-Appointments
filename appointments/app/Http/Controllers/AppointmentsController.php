@@ -27,6 +27,11 @@ class AppointmentsController extends Controller
         );
     }
 
+    /**
+     * I'm not a massive fan of active record and how I can just grab the models
+     * from here but with tests I'm happy to use it and refactor to repositories
+     * or dedicated qwuery classes at a later date.
+     */
     public function show($id)
     {
         $appointment = Appointment::find($id);
