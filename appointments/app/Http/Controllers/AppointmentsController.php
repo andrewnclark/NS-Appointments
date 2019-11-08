@@ -44,10 +44,10 @@ class AppointmentsController extends Controller
     public function store(Request $request)
     {
         $appointment = Appointment::create([
-            'attendee_id' => 1,
-            'staff_id' => 1,
-            'location_id' => 1,
-            'service_id' => 1,
+            'attendee_id' => $request->input('attendee'),
+            'staff_id' => $request->input('staff'),
+            'location_id' => $request->input('location'),
+            'service_id' => $request->input('service'),
             'start' => Carbon::createFromTimestamp($request->input('from')),
             'end' => Carbon::createFromTimestamp($request->input('to')),
         ]);
