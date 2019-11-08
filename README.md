@@ -17,6 +17,8 @@ The authentication has been bound to an interface via the container and defaults
 
 It was also not stated who owns the API - so User is considered an API user and not related to an appointment.
 
+The database does not use foreign keys - I would argue that his should be validated ahead of entry and cascades are not something I'd rely on for deleting data, that said its open to debate and can change from project to project.
+
 ## Questionables (that a word?)
 Mails should be logging but I've not been able to verify this, I ran out of time to write the neccessary tests.
 
