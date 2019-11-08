@@ -15,17 +15,24 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/appointments', [
-    'as' => 'appointments.index',
-    'uses' => 'AppointmentsController@index'
-]);
+$router->group(['prefix' => 'v1'], function() use ($router) {
+    $router->get('/appointments', [
+        'as' => 'appointments.index',
+        'uses' => 'AppointmentsController@index'
+    ]);
+    
+    $router->get('/appointments/{id}/', [
+        'as' => 'appointments.show',
+        'uses' => 'AppointmentsController@show'
+    ]);
+    
+    $router->post('/appointments', [
+        'as' => 'appointments.store',
+        'uses' => 'AppointmentsController@store'
+    ]);
 
-$router->get('/appointments/{id}/', [
-    'as' => 'appointments.show',
-    'uses' => 'AppointmentsController@show'
-]);
-
-$router->post('/appointments', [
-    'as' => 'appointments.store',
-    'uses' => 'AppointmentsController@store'
-]);
+    $router->delete('/appointments/{id}', [
+        'as' => 'appointments.delete',
+        'uses' => 'appointments.destroy'
+    ]);
+});

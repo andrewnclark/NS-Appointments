@@ -57,6 +57,11 @@ class AppointmentsController extends Controller
         );
     }
 
+    public function destory($id)
+    {
+        // out of time
+    }
+
     /**
      * I don't like this and would prefer to move the responses
      * into classes of their own; either CollectionResponse($data) or
