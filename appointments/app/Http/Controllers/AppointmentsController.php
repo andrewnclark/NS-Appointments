@@ -37,7 +37,9 @@ class AppointmentsController extends Controller
     }
 
     /**
-     * A bad invalidated version that has much work to do.
+     * A bad invalidated version that has much work to do. Should never
+     * create models  here and id move the logic to jobs to allow synchronous
+     * or queued execution but that would come with iteration.
      */
     public function store(Request $request)
     {
