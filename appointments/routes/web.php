@@ -33,6 +33,6 @@ $router->group(['prefix' => 'v1'], function() use ($router) {
 
     $router->delete('/appointments/{id}', [
         'as' => 'appointments.delete',
-        'uses' => 'appointments.destroy'
+        'uses' => 'appointments@destroy'
     ]);
 });
