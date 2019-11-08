@@ -6,6 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Appointment extends Model
 {
+    protected $fillable = [
+        'attendee_id',
+        'start',
+        'end',
+        'service_id',
+        'staff_id',
+        'location_id'
+    ];
+    
     public function attendee()
     {
         return $this->belongsTo(Attendee::class);

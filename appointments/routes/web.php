@@ -24,3 +24,8 @@ $router->get('/appointments/{id}/', [
     'as' => 'appointments.show',
     'uses' => 'AppointmentsController@show'
 ]);
+
+$router->post('/appointments', [
+    'as' => 'appointments.store',
+    'uses' => 'AppointmentsController@store'
+]);

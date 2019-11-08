@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Appointment;
 use App\Transformers\Appointment as AppointmentTransformer;
+use Carbon\Carbon;
+use App\Events\AppointmentCreated;
 
 class AppointmentsController extends Controller
 {
@@ -15,13 +17,13 @@ class AppointmentsController extends Controller
      */
     public function __construct(AppointmentTransformer $appointment)
     {
-        $this->transformer = $appointment;
+        $this->output = $appointment;
     }
 
     public function index()
     {
         return $this->response(
-            $this->transformer->fromCollection(Appointment::all())
+            $this->output->fromCollection(Appointment::all())
         );
     }
 
@@ -30,7 +32,25 @@ class AppointmentsController extends Controller
         $appointment = Appointment::find($id);
 
         return $this->response(
-            $this->transformer->fromModel($appointment)
+            $this->output->fromModel($appointment)
+        );
+    }
+
+    public function store(Request $request)
+    {
+        $appointment = Appointment::create([
+            'attendee_id' => 1,
+            'staff_id' => 1,
+            'location_id' => 1,
+            'service_id' => 1,
+            'start' => Carbon::createFromTimestamp($request->input('from')),
+            'end' => Carbon::createFromTimestamp($request->input('to')),
+        ]);
+
+        event(new AppointmentCreated($appointment));
+
+        return $this->response(
+            $this->output->fromModel($appointment)
         );
     }
 

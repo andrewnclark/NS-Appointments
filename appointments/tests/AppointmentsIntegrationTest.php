@@ -2,6 +2,7 @@
 
 use Laravel\Lumen\Testing\DatabaseMigrations;
 use Laravel\Lumen\Testing\DatabaseTransactions;
+use Carbon\Carbon;
 
 class AppointmentsIntegrationTest extends TestCase
 {
@@ -53,5 +54,27 @@ class AppointmentsIntegrationTest extends TestCase
         foreach($appointments as $appointment) {
             $this->assertContains(['appointment_id' => $appointment->id], $decoded['appointments']);
         }
+    }
+
+    /**
+     * @test
+     */
+    public function can_post_to_create_appointment()
+    {
+        $user = factory(App\User::class)->create(['api_token' => 'valid-token']);
+
+        $response = $this->post(route('appointments.store'), [
+            'api_token' => 'valid-token',
+            'attendee' => 1,
+            'staff' => 1,
+            'location' => 1,
+            'service' => 1,
+            'from' => 1573208826, // 10:30am
+            'to' => 1573210800 // 11am
+        ]);
+
+        $this->seeInDatabase('appointments',
+         ['start' => '2019-11-08 10:27:06', 'end' => '2019-11-08 11:00:00', 'staff_id' => 1, 'location_id' => 1, 'service_id' => 1, 'attendee_id' => 1]
+        );
     }
 }
